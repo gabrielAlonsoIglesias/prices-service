@@ -46,9 +46,6 @@ Invoke the build at the root of the project:
   .\mvnw -f ./code/pom.xml clean compile
 ```
 
-You can use the parameter -f (or --file) and specify the path to your pom file, e.g. mvn -f /path/to/pom.xml
-This runs maven "as if" it were in /path/to for the working directory.
-
 ## Run Locally
 
 Execute the `main` method in the `com.inditex.prices.Application` class from your IDE.
@@ -56,6 +53,10 @@ Execute the `main` method in the `com.inditex.prices.Application` class from you
 ## Running Tests
 
 To run unit, integration and acceptance tests, run the following command:
+
+```bash
+  .\mvnw -f ./code/pom.xml clean verify
+```
 
 ```bash
   .\mvnw -f ./code/pom.xml clean verify
