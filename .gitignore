@@ -23,8 +23,8 @@
 hs_err_pid*
 
 # .class files and generated sources
-target/**
-target/**/*
+*/target/*
+*/target/**
 
 # Intellj generated files
 .iml
