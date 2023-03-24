@@ -46,10 +46,6 @@ Invoke the build at the root of the project:
   .\mvnw -f ./code/pom.xml clean compile
 ```
 
-## Run Locally
-
-Execute the `main` method in the `com.inditex.prices.Application` class from your IDE.
-
 ## Running Tests
 
 To run unit, integration and acceptance tests, run the following command:
@@ -58,6 +54,12 @@ To run unit, integration and acceptance tests, run the following command:
   .\mvnw -f ./code/pom.xml clean verify
 ```
 
+## Running Application
+
+Execute the `main` method in the `com.inditex.prices.Application` class from your IDE,
+or run the following command:
+
 ```bash
-  .\mvnw -f ./code/pom.xml clean verify
+  .\mvnw -f ./code/pom.xml spring-boot:run
 ```
+

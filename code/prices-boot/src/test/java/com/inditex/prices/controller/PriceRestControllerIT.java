@@ -156,7 +156,7 @@ class PriceRestControllerIT {
 
     @Test
     @DisplayName("given a non existing brand Id when price retrieval is requested then a UNPROCESSABLE_ENTITY response is retrieved")
-    void getTransactionStatus_UnprocessableEntity() {
+    void getPriceByDateAndProductAndBrand_UnprocessableEntity() {
         final var builder = UriComponentsBuilder.fromHttpUrl(getServiceUrl() + BASE_PATH)
             .queryParam("apply_date", "2020-06-14T10:00:00")
             .queryParam("product_id", 35455L)
@@ -174,7 +174,7 @@ class PriceRestControllerIT {
 
     @Test
     @DisplayName("given a empty brand Id when price retrieval is requested then a BAD_REQUEST response is retrieved")
-    void getTransactionStatus_BadRequest() {
+    void getPriceByDateAndProductAndBrand_BadRequest() {
         final var builder = UriComponentsBuilder.fromHttpUrl(getServiceUrl() + BASE_PATH)
             .queryParam("apply_date", "2020-06-14T10:00:00")
             .queryParam("product_id", 35455L)

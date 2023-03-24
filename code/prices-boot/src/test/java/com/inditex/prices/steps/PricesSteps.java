@@ -49,12 +49,12 @@ public class PricesSteps {
     private TestRestTemplate testRestTemplate;
 
     @Given("^a range of dates with some product prices and priority$")
-    public void a_transaction_that_is_not_stored_in_our_system() {
+    public void a_range_of_dates_with_some_product_prices_and_priority() {
         priceDto = null;
     }
 
     @When("user asks for the price of product id {int} of brand id {int} at {string}")
-    public void userAsksForThePriceOfProductIdOfBrandIdAtT(final long productId, final long brandId, final String applyDate) {
+    public void user_asks_for_the_price_of_product_id_of_brand_id_at(final long productId, final long brandId, final String applyDate) {
         final var builder = UriComponentsBuilder.fromHttpUrl(getServiceUrl() + BASE_PATH)
             .queryParam("apply_date", LocalDateTime.parse(applyDate))
             .queryParam("product_id", productId)
@@ -70,8 +70,9 @@ public class PricesSteps {
     }
 
     @Then("product id {int}, brand id {int}, price list {int}, price {double} and range dates are answered")
-    public void productBrandIdPriceListPriceAndRangeDatesAreAnswered(final long productId, final long brandId,
-                                                                     final long priceList, final double price) {
+    public void product_id_brand_id_price_list_price_and_range_dates_are_answered(
+        final long productId, final long brandId, final long priceList, final double price) {
+        
         assertNotNull(priceDto);
 
         final var expectedPrice = BigDecimal.valueOf(price);
