@@ -1,0 +1,136 @@
+openapi: 3.0.3
+info:
+  title: Prices
+  description: Application API for prices operations
+  version: 1.0.0
+servers:
+  - description: The localhost API server
+    url: '{protocol}://{host}:{port}/{basePath}'
+    variables:
+      protocol:
+        default: http
+      host:
+        default: localhost
+      port:
+        default: '8080'
+      basePath:
+        default: prices
+security:
+  - bearerAuth: [ ]
+tags:
+  - description: Prices operations
+    name: Prices
+paths:
+  /v1/prices:
+    get:
+      tags:
+        - prices
+      operationId: getPriceByDateAndProductAndBrand
+      summary: Returns the price to be applied in the given date for the incoming product and brand
+      parameters:
+        - in: query
+          name: apply_date
+          description: Date in which price must be applied
+          required: true
+          schema:
+            type: string
+            format: date-time
+            example: 2020-07-22T19:16:23
+        - in: query
+          name: product_id
+          description: Product id that is requesting the price to apply
+          required: true
+          schema:
+            type: integer
+            format: int64
+            example: 35455
+        - in: query
+          name: brand_id
+          description: Brand id of the product
+          required: true
+          schema:
+            type: integer
+            format: int64
+            example: 1
+      responses:
+        "200":
+          description: Request Accepted
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Price'
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        "422":
+          description: Non Processable Entity
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+components:
+  schemas:
+    Error:
+      required:
+        - message
+      properties:
+        message:
+          type: string
+          description: Error message
+          example: Error occurred. Please review incoming data
+      example:
+        message: Error occurred. Please review incoming data
+    Price:
+      type: object
+      properties:
+        product_id:
+          type: integer
+          format: int64
+          description: Product id
+          example: 35455
+        brand_id:
+          type: integer
+          format: int64
+          description: Brand id
+          example: 1
+        price_list:
+          type: integer
+          format: int64
+          description: Applied rate id
+          example: 3
+        start_date:
+          type: string
+          format: date-time
+          description: Start date for applied price
+          example: 2020-06-14T14:00:00
+        end_date:
+          type: string
+          format: date-time
+          description: End date for applied price
+          example: 2020-12-31T23:59:59
+        price:
+          type: number
+          format: double
+          multipleOf: 0.01
+          description: Applied price
+          example: 35.50
+      example:
+        product_id: 35455
+        brand_id: 1
+        price_list: 3
+        start_date: 2020-06-14T14:00:00
+        end_date: 2020-12-31T23:59:59
+        price: 35.50
+  securitySchemes:
+    bearerAuth:
+      scheme: basic
+      type: http
